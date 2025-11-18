@@ -64,4 +64,60 @@ Now we'll make another policy solely for `ppq.apple.com`. This one will be toggl
 
 Then click Create policy.
 
-At this point we're almost done setting up the DNS, but you have the option of setting up an adblocker. Since adding thousands of hosts by hand would be just a little tedious, here are [in-depth instructions](https://github.com/mrrfv/cloudflare-gateway-pihole-scripts)
+At this point we're almost done setting up the DNS, but you have the option of setting up an adblocker. Since adding thousands of hosts by hand would be just a little tedious, here are [in-depth instructions](https://github.com/mrrfv/cloudflare-gateway-pihole-scripts) on a script that automates the whole process (runs very quickly, and includes automatic updates to host list). Check it out!
+
+Whether you setup the ad-blocker or not, you will need to note down your **Account ID** and an **API Token**.
+- **Account ID**:
+    - Should be visible in the site's URL: `https://one.dash.cloudflare.com/{ACCOUNT_ID}/*`
+    - Note it down
+- **API Token**:
+    - Head to your [profile's API Tokens](https://dash.cloudflare.com/profile/api-tokens)
+    - Create Token -> Custom Token
+    - Token name: (Anything)
+    - Permissions: `Account`, `Zero Trust`, `Edit`
+    - Finish token creation and note it down
+
+Final steps! Head back to the Zero Trust dashboard, and in the sidebar navigate to **Networks -> Resolvers & Proxies**. Add your Default Location, and setup:
+- Select DNS endpoints:
+    - DNS over HTTPS (DoH) -> ON
+    - Note down URL (Should be `https://{SOMETHING}.cloudflare-gateway.com/dns-query`)
+
+And we're done setting up the backend!
+
+### 2. DNS Profile
+
+For this step, you'll need the DoH URL from the end of step 1. Start with opening up your favorite Terminal and running:
+
+```bash
+nslookup {SOMETHING}.cloudflare-gateway.com
+```
+(Make sure not to include the `https://` or `/dns-query`)
+You should see an output like:
+```bash
+Server:		{not important}
+Address:	{not important}
+
+Non-authoritative answer:
+Name:	{SOMETHING}.cloudflare-gateway.com
+Address: {IMPORTANT IP}
+Name:	{SOMETHING}.cloudflare-gateway.com
+Address: {IMPORTANT IP}
+```
+Note down those `IMPORTANT IP`s at the end. Next, use [this Shortcut](https://www.icloud.com/shortcuts/115adcb54cbf4c69a5fb246c567fce46) to generate and install a configuration profile by entering the full DoH URL and then a line separated list of IP Addresses that came up from the `nslookup`. Install the configuration profile in **Settings -> General -> Profile & Device Management**.
+> [!NOTE]
+> Your DNS will automatically switch to this one once you install, so make sure all DNS policies are enabled on your Cloudflare Zero Trust dashboard!
+
+### 3. Toggle PPQ Shortcut
+Have your Account ID and API Token handy. Install the [Toggle PPQ Shortcut](https://www.icloud.com/shortcuts/bf1844c12ade478e944c1f4536e54527), and follow the setup instructions. If you leave something blank or make a mistake, you can edit the first action's "Values" later.
+
+That's it! You can share the shortcut to add it to your home screen.
+
+## Usage
+
+Once you've set it up, there's really no maintenance you have to do. Just like any other DNS method, keep the DNS on at all times, and don't use VPNs unless they work with the DNS config.
+
+When you want to install an app, run the toggle shortcut to enable `ppq.apple.com` briefly, open the app once, then run the toggle shortcut again. Note that it turns airplane mode on / wifi off for a few seconds to refresh your DNS, so don't run it while installing anything.
+
+That's all! If this tutorial or my shortcuts were helpful, leave a star on my repo or [Buy me a coffee](https://ko-fi.com/danielthemaniel).
+
+Enjoy :)
