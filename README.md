@@ -38,7 +38,7 @@ If it's your first time there, it will ask you for:
 Head back to the dashboard, and in the sidebar on the left heat to **Reusable components -> Lists**. You will now configure the list of domains to block. Click the **+ Upload CSV** button, and setup:
 - List name: (Anything)
 - List type: `Hostnames`
-- CSV File: [`blacklist.csv`]() (https://github.com/Dan1elTheMan1el/Antirevoke-Cloudflare-DNS/releases/download/v0-alpha/blacklist.csv)
+- CSV File: [`blacklist.csv`](https://github.com/Dan1elTheMan1el/Antirevoke-Cloudflare-DNS/releases/download/v0-alpha/blacklist.csv)
 
 Then click create.
 
