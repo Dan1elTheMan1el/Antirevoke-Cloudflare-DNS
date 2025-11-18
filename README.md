@@ -103,7 +103,7 @@ Address: {IMPORTANT IP}
 Name:	{SOMETHING}.cloudflare-gateway.com
 Address: {IMPORTANT IP}
 ```
-Note down those `IMPORTANT IP`s at the end. Next, use [this Shortcut](https://www.icloud.com/shortcuts/115adcb54cbf4c69a5fb246c567fce46) to generate and install a configuration profile by entering the full DoH URL and then a line separated list of IP Addresses that came up from the `nslookup`. Install the configuration profile in **Settings -> General -> Profile & Device Management**.
+Note down those `IMPORTANT IP`s at the end. Next, use [this Shortcut](https://www.icloud.com/shortcuts/115adcb54cbf4c69a5fb246c567fce46) or [this tool](https://dns.notjakob.com/tool.html) to generate and install a configuration profile by entering the full DoH URL and then a line separated list of IP Addresses that came up from the `nslookup`. Install the configuration profile in **Settings -> General -> Profile & Device Management**.
 > [!NOTE]
 > Your DNS will automatically switch to this one once you install, so make sure all DNS policies are enabled on your Cloudflare Zero Trust dashboard!
 
